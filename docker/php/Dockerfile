@@ -1,10 +1,10 @@
-FROM php:7.1-fpm-jessie
+FROM php:7.3-fpm
 
 ENV PHPREDIS_VERSION 3.1.6
 
 
 # Mcrypt
-RUN apt-get update && apt-get install -y libmcrypt-dev && docker-php-ext-install -j$(nproc) mcrypt
+#RUN apt-get update && apt-get install -y libmcrypt-dev && docker-php-ext-install -j$(nproc) mcrypt
 
 # GD
 RUN apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
