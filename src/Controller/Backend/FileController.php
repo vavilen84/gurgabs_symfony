@@ -5,10 +5,12 @@ namespace App\Controller\Backend;
 use App\Entity\File;
 use App\Form\FileType;
 use App\Repository\FileRepository;
+use mysql_xdevapi\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Helpers\Common;
 
 /**
  * @Route("/backend/file")
@@ -30,20 +32,36 @@ class FileController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $file = new File();
-        $form = $this->createForm(FileType::class, $file);
+        $model = new File();
+        $form = $this->createForm(FileType::class, $model);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $form['file']->getData();
+            $ext = $file->guessClientExtension();
+            $fileName = Common::getUniqueString() . '.' . $ext;
+            try {
+                $file->move(
+                    $this->getParameter('media_folder'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                throw new \Exception($e);
+            }
+            $model->setFile($fileName);
+            $model->setExt($ext);
+            $model->setOriginalName($file->getClientOriginalName());
+
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($file);
+            $entityManager->persist($model);
             $entityManager->flush();
 
             return $this->redirectToRoute('backend_file_index');
         }
 
-        return $this->render('file/new.html.twig', [
-            'file' => $file,
+        return $this->render('backend/file/new.html.twig', [
+            'file' => $model,
             'form' => $form->createView(),
         ]);
     }
@@ -83,7 +101,7 @@ class FileController extends AbstractController
      */
     public function delete(Request $request, File $file): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$file->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $file->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($file);
             $entityManager->flush();

@@ -7,4 +7,6 @@
 /var/
 /vendor/
 .idea
+/public/media
+!/public/media/.gitignore
 ###< symfony/framework-bundle ###
