@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GURGABS{% endblock %}
+
+{% block body %}
+    <h1>GURGABS</h1>
+    {% for event in events %}
+        <div>{{ event.title }}</div>
+    {% endfor %}
+{% endblock %}

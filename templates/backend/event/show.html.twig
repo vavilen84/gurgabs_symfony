@@ -16,6 +16,10 @@
                 <td>{{ event.title }}</td>
             </tr>
             <tr>
+                <th>Event Date</th>
+                <td>{{ event.eventDate | date("m/d/Y")}}</td>
+            </tr>
+            <tr>
                 <th>Content</th>
                 <td>{{ event.content }}</td>
             </tr>

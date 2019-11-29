@@ -6,6 +6,7 @@ use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class EventType extends AbstractType
 {
@@ -14,6 +15,7 @@ class EventType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
+            ->add('eventDate')
         ;
     }
 

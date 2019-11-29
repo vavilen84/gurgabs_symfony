@@ -14,3 +14,16 @@
     </div>
 
 {% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/datepicker/jquery.datetimepicker.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#event_eventDate').datetimepicker({ formatDate:'d.m.Y'});
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('js/datepicker/jquery.datetimepicker.css') }}">
+{% endblock %}

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Event
 {
@@ -25,6 +26,13 @@ class Event
      * @ORM\Column(type="text")
      */
     private $content;
+
+    /**
+     * @var datetime $event_date
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $event_date;
 
     public function getId(): ?int
     {
@@ -51,6 +59,18 @@ class Event
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getEventDate(): ?\DateTimeInterface
+    {
+        return $this->event_date;
+    }
+
+    public function setEventDate(\DateTimeInterface $event_date): self
+    {
+        $this->event_date = $event_date;
 
         return $this;
     }
