@@ -15,3 +15,8 @@ body, html {
 .hide {
     display: none;
 }
+
+#wo-breadcrumbs .separator {
+    display: inline-block;
+    margin: 0 10px;
+}

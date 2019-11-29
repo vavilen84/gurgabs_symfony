@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 /**
  * @Route("/backend/event")
@@ -18,8 +19,11 @@ class EventController extends AbstractController
     /**
      * @Route("/", name="backend_event_index", methods={"GET"})
      */
-    public function index(EventRepository $eventRepository): Response
+    public function index(EventRepository $eventRepository, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
         return $this->render('backend/event/index.html.twig', [
             'events' => $eventRepository->findAll(),
         ]);
@@ -28,8 +32,11 @@ class EventController extends AbstractController
     /**
      * @Route("/new", name="backend_event_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
@@ -51,8 +58,11 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}", name="backend_event_show", methods={"GET"})
      */
-    public function show(Event $event): Response
+    public function show(Event $event, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
         return $this->render('backend/event/show.html.twig', [
             'event' => $event,
         ]);
@@ -61,8 +71,11 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}/edit", name="backend_event_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Event $event): Response
+    public function edit(Request $request, Event $event, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
@@ -83,7 +96,7 @@ class EventController extends AbstractController
      */
     public function delete(Request $request, Event $event): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $event->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($event);
             $entityManager->flush();

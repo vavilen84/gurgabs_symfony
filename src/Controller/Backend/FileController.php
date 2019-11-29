@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Helpers\Common;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 /**
  * @Route("/backend/file")
@@ -20,8 +21,11 @@ class FileController extends AbstractController
     /**
      * @Route("/", name="backend_file_index", methods={"GET"})
      */
-    public function index(FileRepository $fileRepository): Response
+    public function index(FileRepository $fileRepository, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
         return $this->render('backend/file/index.html.twig', [
             'files' => $fileRepository->findAll(),
         ]);
@@ -30,8 +34,11 @@ class FileController extends AbstractController
     /**
      * @Route("/new", name="backend_file_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
         $model = new File();
         $form = $this->createForm(FileType::class, $model);
         $form->handleRequest($request);
@@ -69,8 +76,11 @@ class FileController extends AbstractController
     /**
      * @Route("/{id}", name="backend_file_show", methods={"GET"})
      */
-    public function show(File $file): Response
+    public function show(File $file, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
         return $this->render('backend/file/show.html.twig', [
             'file' => $file,
         ]);
@@ -79,8 +89,11 @@ class FileController extends AbstractController
     /**
      * @Route("/{id}/edit", name="backend_file_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, File $file): Response
+    public function edit(Request $request, File $file, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
 
