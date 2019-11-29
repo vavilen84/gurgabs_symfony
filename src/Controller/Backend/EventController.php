@@ -39,10 +39,10 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('event_index');
+            return $this->redirectToRoute('backend_event_index');
         }
 
-        return $this->render('event/new.html.twig', [
+        return $this->render('backend/event/new.html.twig', [
             'event' => $event,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class EventController extends AbstractController
      */
     public function show(Event $event): Response
     {
-        return $this->render('event/show.html.twig', [
+        return $this->render('backend/event/show.html.twig', [
             'event' => $event,
         ]);
     }
@@ -69,10 +69,10 @@ class EventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('event_index');
+            return $this->redirectToRoute('backend_event_index');
         }
 
-        return $this->render('event/edit.html.twig', [
+        return $this->render('backend/event/edit.html.twig', [
             'event' => $event,
             'form' => $form->createView(),
         ]);
@@ -89,6 +89,6 @@ class EventController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('event_index');
+        return $this->redirectToRoute('backend_event_index');
     }
 }
