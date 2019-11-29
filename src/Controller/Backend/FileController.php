@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Backend;
 
 use App\Entity\File;
 use App\Form\FileType;
@@ -11,22 +11,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/file")
+ * @Route("/backend/file")
  */
 class FileController extends AbstractController
 {
     /**
-     * @Route("/", name="file_index", methods={"GET"})
+     * @Route("/", name="backend_file_index", methods={"GET"})
      */
     public function index(FileRepository $fileRepository): Response
     {
-        return $this->render('file/index.html.twig', [
+        return $this->render('backend/file/index.html.twig', [
             'files' => $fileRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="file_new", methods={"GET","POST"})
+     * @Route("/new", name="backend_file_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,7 +39,7 @@ class FileController extends AbstractController
             $entityManager->persist($file);
             $entityManager->flush();
 
-            return $this->redirectToRoute('file_index');
+            return $this->redirectToRoute('backend_file_index');
         }
 
         return $this->render('file/new.html.twig', [
@@ -49,17 +49,17 @@ class FileController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="file_show", methods={"GET"})
+     * @Route("/{id}", name="backend_file_show", methods={"GET"})
      */
     public function show(File $file): Response
     {
-        return $this->render('file/show.html.twig', [
+        return $this->render('backend/file/show.html.twig', [
             'file' => $file,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="file_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="backend_file_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, File $file): Response
     {
@@ -69,17 +69,17 @@ class FileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('file_index');
+            return $this->redirectToRoute('backend_file_index');
         }
 
-        return $this->render('file/edit.html.twig', [
+        return $this->render('backend/file/edit.html.twig', [
             'file' => $file,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="file_delete", methods={"DELETE"})
+     * @Route("/{id}", name="backend_file_delete", methods={"DELETE"})
      */
     public function delete(Request $request, File $file): Response
     {
@@ -89,6 +89,6 @@ class FileController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('file_index');
+        return $this->redirectToRoute('backend_file_index');
     }
 }

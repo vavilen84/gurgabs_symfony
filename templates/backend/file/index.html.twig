@@ -11,7 +11,8 @@
                 <th>Id</th>
                 <th>Original_name</th>
                 <th>Ext</th>
-                <th>Filename</th>
+                <th>Unique Filename</th>
+                <th>Description</th>
                 <th>Type</th>
                 <th>actions</th>
             </tr>
@@ -22,11 +23,12 @@
                 <td>{{ file.id }}</td>
                 <td>{{ file.originalName }}</td>
                 <td>{{ file.ext }}</td>
-                <td>{{ file.filename }}</td>
+                <td>{{ file.uniqueFilename }}</td>
+                <td>{{ file.description }}</td>
                 <td>{{ file.type }}</td>
                 <td>
-                    <a href="{{ path('file_show', {'id': file.id}) }}">show</a>
-                    <a href="{{ path('file_edit', {'id': file.id}) }}">edit</a>
+                    <a href="{{ path('backend_file_show', {'id': file.id}) }}" class="btn btn-primary">show</a>
+                    <a href="{{ path('backend_file_edit', {'id': file.id}) }}" class="btn btn-primary">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +39,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('file_new') }}">Create new</a>
+    <a href="{{ path('backend_file_new') }}" class="btn btn-primary">Create new</a>
 {% endblock %}

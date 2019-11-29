@@ -29,7 +29,12 @@ class File
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $filename;
+    private $uniqueFilename;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="integer")
@@ -85,6 +90,30 @@ class File
     public function setType(int $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getUniqueFilename(): ?string
+    {
+        return $this->uniqueFilename;
+    }
+
+    public function setUniqueFilename(string $uniqueFilename): self
+    {
+        $this->uniqueFilename = $uniqueFilename;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

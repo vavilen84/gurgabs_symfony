@@ -20,8 +20,12 @@
                 <td>{{ file.ext }}</td>
             </tr>
             <tr>
-                <th>Filename</th>
-                <td>{{ file.filename }}</td>
+                <th>Unique Filename</th>
+                <td>{{ file.uniqueFilename }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ file.description }}</td>
             </tr>
             <tr>
                 <th>Type</th>
@@ -30,9 +34,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('file_index') }}">back to list</a>
+    <a href="{{ path('backend_file_index') }}" class="btn btn-primary">back to list</a>
 
-    <a href="{{ path('file_edit', {'id': file.id}) }}">edit</a>
+    <a href="{{ path('backend_file_edit', {'id': file.id}) }}" class="btn btn-primary">edit</a>
 
-    {{ include('file/_delete_form.html.twig') }}
+    {{ include('backend/file/_delete_form.html.twig') }}
 {% endblock %}
