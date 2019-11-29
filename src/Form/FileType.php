@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType as FileTypeClass;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Enum\File as FileEnum;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\HttpFoundation\File\File as FileComponent;
 
 class FileType extends AbstractType
 {
@@ -16,8 +18,13 @@ class FileType extends AbstractType
     {
         $builder
             ->add('description')
-            ->add('file', FileTypeClass::class, ['label' => 'Media File'])
+            ->add('file', FileTypeClass::class, [
+                'label' => 'Media File',
+                'required' => false,
+                'mapped' => false,
+            ])
             ->add('type', ChoiceType::class, [
+                'required' => false,
                 'choices' => [
                     'Music' => FileEnum::MUSIC_TYPE,
                     'Video' => FileEnum::VIDEO_TYPE,
@@ -28,8 +35,10 @@ class FileType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-                                   'data_class' => File::class,
-                               ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => File::class,
+            ]
+        );
     }
 }
