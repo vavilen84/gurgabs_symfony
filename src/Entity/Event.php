@@ -28,9 +28,7 @@ class Event
     private $content;
 
     /**
-     * @var datetime $event_date
-     *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
      */
     protected $event_date;
 
@@ -63,12 +61,12 @@ class Event
         return $this;
     }
 
-    public function getEventDate(): ?\DateTimeInterface
+    public function getEventDate(): ?string
     {
         return $this->event_date;
     }
 
-    public function setEventDate(\DateTimeInterface $event_date): self
+    public function setEventDate(string $event_date): self
     {
         $this->event_date = $event_date;
 
