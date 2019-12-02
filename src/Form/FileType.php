@@ -24,7 +24,7 @@ class FileType extends AbstractType
                 'mapped' => false,
             ])
             ->add('type', ChoiceType::class, [
-                'required' => false,
+                'required' => true,
                 'choices' => [
                     'Music' => FileEnum::MUSIC_TYPE,
                     'Video' => FileEnum::VIDEO_TYPE,
