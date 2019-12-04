@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Helpers\Common;
 use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
+use App\Entity\Product;
 
 /**
  * @Route("/backend/file")
@@ -121,5 +122,60 @@ class FileController extends AbstractController
         }
 
         return $this->redirectToRoute('backend_file_index');
+    }
+
+    /**
+     * @Route("/product/{id}/add-image", name="backend_file_add_product_image", methods={"GET","POST"})
+     */
+    public function addProductImage(Request $request, Product $product, Breadcrumbs $breadcrumbs): Response
+    {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem(
+            "Product",
+            $this->generateUrl("backend_product_edit", ['id' => $product->getId()])
+        );
+        $breadcrumbs->addItem(
+            "Files",
+            $this->generateUrl("backend_file_add_product_image", ['id' => $product->getId()])
+        );
+
+        $model = new File();
+
+        $form = $this->createForm(FileType::class, $model);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $form['file']->getData();
+            $ext = $file->guessClientExtension();
+            $fileName = Common::getUniqueString() . '.' . $ext;
+            try {
+                $file->move(
+                    $this->getParameter('media_folder'),
+                    $fileName
+                );
+            } catch (FileException $e) {
+                throw new \Exception($e);
+            }
+            $model->setType(\App\Enum\File::PRODUCT_IMAGE_TYPE);
+            $model->setProduct($product);
+            $model->setFile($fileName);
+            $model->setExt($ext);
+            $model->setOriginalName($file->getClientOriginalName());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($model);
+            $entityManager->flush();
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('backend_product_edit', ['id' => $product->getId()]);
+        }
+
+        return $this->render('backend/file/add-product-image.html.twig', [
+            'file' => $model,
+            'form' => $form->createView(),
+        ]);
     }
 }

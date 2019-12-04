@@ -7,6 +7,8 @@
 
     {{ include('backend/product/_form.html.twig', {'button_label': 'Update'}) }}
 
+    <a class="btn btn-primary" href="{{ path('backend_file_add_product_image', {'id': product.id}) }}">Add Image</a>
+
     <a class="btn btn-primary" href="{{ path('backend_product_index') }}">back to list</a>
 
     <div class="pt20">
