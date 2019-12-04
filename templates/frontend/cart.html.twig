@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Products{% endblock %}
+{% block title %}Cart{% endblock %}
 
 {% block body %}
     {% include 'frontend/header_nav.html.twig' %}
@@ -22,7 +22,7 @@
                 <div>
                     {{ product.description }}
                 </div>
-                <a class="btn btn-primary add-to-cart-btn" href="{{ path('backend_file_show', {'id': file.id}) }}">Add to cart</a>
+                <a class="btn btn-primary add-to-cart-btn" href="{{ path('backend_file_show', {'id': file.id}) }}">Добавить в корзину</a>
             </li>
             <hr>
         {% endfor %}
