@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use App\Enum\User as UserEnum;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -67,7 +67,7 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = UserEnum::ROLE_USER;
 
         return array_unique($roles);
     }

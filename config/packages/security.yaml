@@ -1,3 +1,9 @@
+services:
+  app.doctrine.encode_password_listener:
+    class: App\Doctrine\EncodePasswordListener
+    autowire: true
+    tags:
+      - { name: doctrine.event_subscriber }
 security:
     providers:
       users:
