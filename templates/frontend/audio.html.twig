@@ -1,9 +1,16 @@
-<ul>
-    {% for file in files %}
-        <li>
-            <audio controls>
-                <source src="/media/{{ file.file }}" type="audio/{{ file.ext }}">
-            </audio>
-        </li>
-    {% endfor %}
-</ul>
+{% extends 'base.html.twig' %}
+
+{% block title %}Audio{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for file in files %}
+            <li>
+                <audio controls>
+                    <source src="/media/{{ file.file }}" type="audio/{{ file.ext }}">
+                </audio>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+

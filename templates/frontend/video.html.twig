@@ -1,9 +1,15 @@
-<ul>
-    {% for file in files %}
-        <li>
-            <video width="320" height="240" controls>
-                <source src="/media/{{ file.file }}" type="video/{{ file.ext }}">
-            </video>
-        </li>
-    {% endfor %}
-</ul>
+{% extends 'base.html.twig' %}
+
+{% block title %}Video{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for file in files %}
+            <li>
+                <video width="320" height="240" controls>
+                    <source src="/media/{{ file.file }}" type="video/{{ file.ext }}">
+                </video>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

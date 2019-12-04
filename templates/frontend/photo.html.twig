@@ -1,7 +1,15 @@
-<ul>
-    {% for file in files %}
-        <li>
-            <img src="/media/{{ file.file }}" alt="">
-        </li>
-    {% endfor %}
-</ul>
+{% extends 'base.html.twig' %}
+
+{% block title %}Photo{% endblock %}
+
+{% block body %}
+    <ul>
+        {% for file in files %}
+            <li>
+                <img src="/media/{{ file.file }}" alt="">
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+

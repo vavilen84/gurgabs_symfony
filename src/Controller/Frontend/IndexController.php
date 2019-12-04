@@ -4,6 +4,7 @@ namespace App\Controller\Frontend;
 
 use App\Entity\Event;
 use App\Entity\File;
+use App\Entity\Product;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use App\Repository\FileRepository;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Enum\File as FileEnum;
+use App\Enum\Product as ProductEnum;
 
 /**
  * @Route("/")
@@ -67,6 +69,19 @@ class IndexController extends AbstractController
 
         return $this->render('frontend/photo.html.twig', [
             'files' => $files,
+        ]);
+    }
+
+    /**
+     * @Route("/products", name="products", methods={"GET"})
+     */
+    public function products(FileRepository $fileRepository): Response
+    {
+        $productRepository = $this->getDoctrine()->getRepository(Product::class);
+        $products = $productRepository->findAll();
+
+        return $this->render('frontend/products.html.twig', [
+            'products' => $products,
         ]);
     }
 }
