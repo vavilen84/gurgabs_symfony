@@ -1,15 +1,21 @@
-<ul>
-    <li>
-        <a class="btn btn-primary" href="{{ path('home') }}">Home</a>
-        <a class="btn btn-primary" href="{{ path('video') }}">Video</a>
-        <a class="btn btn-primary" href="{{ path('audio') }}">Audio</a>
-        <a class="btn btn-primary" href="{{ path('photo') }}">Photo</a>
-        <a class="btn btn-primary" href="{{ path('products') }}">Merch</a>
-        {% if app.user %}
-            <a class="btn btn-primary" href="{{ path('backend_index') }}">Admin</a>
-            <a class="btn btn-primary" href="{{ path('app_logout') }}">Logout</a></span>
-        {% else %}
-            <a class="btn btn-primary" href="{{ path('app_login') }}">Login</a></span>
-        {% endif %}
-    </li>
-</ul>
+<div class="fl">
+    <a class="btn btn-primary" href="{{ path('home') }}">Home</a>
+    <a class="btn btn-primary" href="{{ path('video') }}">Video</a>
+    <a class="btn btn-primary" href="{{ path('audio') }}">Audio</a>
+    <a class="btn btn-primary" href="{{ path('photo') }}">Photo</a>
+    <a class="btn btn-primary" href="{{ path('products') }}">Merch</a>
+    {% if app.user %}
+        <a class="btn btn-primary" href="{{ path('backend_index') }}">Admin</a>
+        <a class="btn btn-primary" href="{{ path('app_logout') }}">Logout</a></span>
+    {% else %}
+        <a class="btn btn-primary" href="{{ path('app_login') }}">Login</a></span>
+    {% endif %}
+</div>
+<div class="fr">
+    <div class="cart">
+        <div class="quantity-wrap">
+            <div class="quantity">3</div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>

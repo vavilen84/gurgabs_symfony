@@ -3,6 +3,7 @@
 {% block title %}Photo{% endblock %}
 
 {% block body %}
+    {% include 'frontend/header_nav.html.twig' %}
     <ul>
         {% for file in files %}
             <li>
