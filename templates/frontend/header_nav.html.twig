@@ -4,5 +4,10 @@
         <a class="btn btn-primary" href="{{ path('video') }}">Video</a>
         <a class="btn btn-primary" href="{{ path('audio') }}">Audio</a>
         <a class="btn btn-primary" href="{{ path('photo') }}">Photo</a>
+        {% if app.user %}
+            <a class="btn btn-primary" href="{{ path('app_logout') }}">Logout</a></span>
+        {% else %}
+            <a class="btn btn-primary" href="{{ path('app_login') }}">Login</a></span>
+        {% endif %}
     </li>
 </ul>
