@@ -26,9 +26,11 @@
         </tbody>
     </table>
 
-    <a href="{{ path('product_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('backend_product_index') }}">back to list</a>
 
-    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+    <a class="btn btn-primary" href="{{ path('backend_product_edit', {'id': product.id}) }}">edit</a>
 
-    {{ include('product/_delete_form.html.twig') }}
+    <div class="pt20">
+        {{ include('backend/product/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

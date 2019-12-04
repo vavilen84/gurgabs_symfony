@@ -41,10 +41,6 @@ class File
      */
     private $type;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="images")
-     */
-    private $product;
 
     public function getId(): ?int
     {
@@ -102,24 +98,5 @@ class File
     public function getFile(): ?string
     {
         return $this->file;
-    }
-
-    public function setFile(string $file): self
-    {
-        $this->file = $file;
-
-        return $this;
-    }
-
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
-
-    public function setProduct(?Product $product): self
-    {
-        $this->product = $product;
-
-        return $this;
     }
 }

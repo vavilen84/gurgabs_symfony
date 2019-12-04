@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Backend;
 
 use App\Entity\Product;
 use App\Form\ProductType;
@@ -11,22 +11,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/product")
+ * @Route("/backend/product")
  */
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", name="product_index", methods={"GET"})
+     * @Route("/", name="backend_product_index", methods={"GET"})
      */
     public function index(ProductRepository $productRepository): Response
     {
-        return $this->render('product/index.html.twig', [
+        return $this->render('backend/product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="product_new", methods={"GET","POST"})
+     * @Route("/new", name="backend_product_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,27 +39,27 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index');
+            return $this->redirectToRoute('backend_product_index');
         }
 
-        return $this->render('product/new.html.twig', [
+        return $this->render('backend/product/new.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="product_show", methods={"GET"})
+     * @Route("/{id}", name="backend_product_show", methods={"GET"})
      */
     public function show(Product $product): Response
     {
-        return $this->render('product/show.html.twig', [
+        return $this->render('backend/product/show.html.twig', [
             'product' => $product,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="product_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="backend_product_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Product $product): Response
     {
@@ -69,17 +69,17 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('product_index');
+            return $this->redirectToRoute('backend_product_index');
         }
 
-        return $this->render('product/edit.html.twig', [
+        return $this->render('backend/product/edit.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="product_delete", methods={"DELETE"})
+     * @Route("/{id}", name="backend_product_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Product $product): Response
     {
@@ -89,6 +89,6 @@ class ProductController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('product_index');
+        return $this->redirectToRoute('backend_product_index');
     }
 }

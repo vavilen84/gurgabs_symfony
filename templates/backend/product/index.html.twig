@@ -23,8 +23,8 @@
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
                 <td>
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('backend_product_show', {'id': product.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('backend_product_edit', {'id': product.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('product_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('backend_product_new') }}">Create new</a>
 {% endblock %}
