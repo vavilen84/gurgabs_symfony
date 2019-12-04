@@ -124,6 +124,22 @@ class FileController extends AbstractController
         return $this->redirectToRoute('backend_file_index');
     }
 
+
+    /**
+     * @Route("/product-image-delete/{id}", name="backend_product_image_delete", methods={"DELETE"})
+     */
+    public function productImageDelete(Request $request, File $file): Response
+    {
+        $product = $file->getProduct();
+        if ($this->isCsrfTokenValid('delete' . $file->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($file);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('backend_product_edit', ['id' => $product->getId()]);
+    }
+
     /**
      * @Route("/product/{id}/add-image", name="backend_file_add_product_image", methods={"GET","POST"})
      */

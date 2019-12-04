@@ -7,11 +7,34 @@
 
     {{ include('backend/product/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a class="btn btn-primary" href="{{ path('backend_file_add_product_image', {'id': product.id}) }}">Add Image</a>
-
-    <a class="btn btn-primary" href="{{ path('backend_product_index') }}">back to list</a>
+    <div class="pt20">
+        <a class="btn btn-primary" href="{{ path('backend_product_index') }}">back to list</a>
+    </div>
 
     <div class="pt20">
         {{ include('backend/product/_delete_form.html.twig') }}
     </div>
+
+    <hr>
+    <hr>
+    <h3>Images</h3>
+    <a class="btn btn-primary" href="{{ path('backend_file_add_product_image', {'id': product.id}) }}">Add Image</a>
+
+    <ul class="product-images-list pt20">
+        {% for image in images %}
+            <li>
+                <a href="/media/{{ image.file }}" target="_blank">
+                    <img src="/media/{{ image.file }}" alt="">
+                </a>
+                <div class="pt20">
+                    <form method="post" action="{{ path('backend_product_image_delete', {'id': image.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+                        <button class="btn btn-danger" class="btn btn-primary">Delete</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

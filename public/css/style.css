@@ -27,5 +27,15 @@ body, html {
 }
 
 ul li {
-    list-style:none;
+    list-style: none;
+}
+
+.product-images-list li {
+    width: 25%;
+    padding:5%;
+    border:1px solid gray;
+}
+
+.product-images-list li img {
+    max-width: 100%;
 }
