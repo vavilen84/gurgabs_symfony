@@ -184,8 +184,6 @@ class FileController extends AbstractController
             $entityManager->persist($model);
             $entityManager->flush();
 
-            $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('backend_product_edit', ['id' => $product->getId()]);
         }
 

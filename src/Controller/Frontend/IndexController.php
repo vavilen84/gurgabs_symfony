@@ -4,8 +4,12 @@ namespace App\Controller\Frontend;
 
 use App\Entity\Event;
 use App\Entity\File;
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Form\EventType;
+use App\Form\FileType;
+use App\Form\OrderType;
+use App\Helpers\Common;
 use App\Repository\EventRepository;
 use App\Repository\FileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -95,12 +99,34 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/cart", name="cart", methods={"GET"})
+     * @Route("/success-order-page", name="success_order_page", methods={"GET"})
      */
-    public function cart(): Response
+    public function successOrderPage(): Response
     {
-        $productRepository = $this->getDoctrine()->getRepository(Product::class);
+        return $this->render('frontend/success_order_page.html.twig', []);
+    }
 
+    /**
+     * @Route("/cart", name="cart", methods={"GET","POST"})
+     */
+    public function cart(Request $request): Response
+    {
+        $model = new Order();
+
+        $form = $this->createForm(OrderType::class, $model);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $model->setCreatedAt(new \DateTime("now"));
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($model);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('success_order_page');
+        }
+
+        $productRepository = $this->getDoctrine()->getRepository(Product::class);
         $cart = $this->session->get('cart');
         $products = [];
         if (!empty($cart)) {
@@ -117,6 +143,7 @@ class IndexController extends AbstractController
 
         return $this->render('frontend/cart.html.twig', [
             'products' => $products,
+            'form' => $form->createView(),
         ]);
     }
 

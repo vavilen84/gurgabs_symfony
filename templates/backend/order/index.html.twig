@@ -31,7 +31,8 @@
                 <td>{{ order.comment }}</td>
                 <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('backend_order_show', {'id': order.id}) }}">show</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('backend_order_show', {'id': order.id}) }}">show</a>
                 </td>
             </tr>
         {% else %}

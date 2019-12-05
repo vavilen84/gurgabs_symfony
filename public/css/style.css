@@ -140,3 +140,7 @@ ul li {
 .mfp-with-zoom.mfp-removing.mfp-bg {
     opacity: 0;
 }
+.backend-nav li {
+    float:left;
+    padding:5px;
+}

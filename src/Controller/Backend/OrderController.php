@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 /**
  * @Route("/backend/order")
@@ -18,24 +19,24 @@ class OrderController extends AbstractController
     /**
      * @Route("/", name="backend_order_index", methods={"GET"})
      */
-    public function index(OrderRepository $orderRepository): Response
+    public function index(OrderRepository $orderRepository, Breadcrumbs $breadcrumbs): Response
     {
-        $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
-        $orders = $qb
-            ->select('o')
-            ->from('order', 'o')
-            ->orderBy('o.id', 'DESC');
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Orders", $this->get("router")->generate("backend_order_index"));
 
         return $this->render('backend/order/index.html.twig', [
-            'orders' => $orders,
+            'orders' => $orderRepository->findAll(),
         ]);
     }
 
     /**
      * @Route("/{id}", name="backend_order_show", methods={"GET"})
      */
-    public function show(Order $order): Response
+    public function show(Order $order, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Orders", $this->get("router")->generate("backend_order_index"));
+
         return $this->render('backend/order/show.html.twig', [
             'order' => $order,
         ]);

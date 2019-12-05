@@ -18,7 +18,6 @@ class OrderType extends AbstractType
             ->add('skype')
             ->add('address')
             ->add('comment')
-            ->add('created_at')
         ;
     }
 
