@@ -12,10 +12,12 @@
     {% endif %}
 </div>
 <div class="fr">
-    <div class="cart">
-        <div class="quantity-wrap">
-            <div class="quantity">3</div>
+    <a href="{{ path('cart') }}">
+        <div class="cart">
+            <span class="quantity-wrap">
+                <span class="quantity">{{ cart_quantity() ?  cart_quantity() : '' }}</span>
+            </span>
         </div>
-    </div>
+    </a>
 </div>
 <div class="clear"></div>

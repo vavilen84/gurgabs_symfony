@@ -102,9 +102,9 @@ class IndexController extends AbstractController
         $cart = $this->session->get('cart');
         $products = [];
         if (!empty($cart)) {
-            foreach ($cart as $product) {
-                if ($product instanceof Product) {
-                    $products[] = $product;
+            foreach ($cart as $productInCart) {
+                if ($productInCart instanceof ProductInCart) {
+                    $products[] = $productInCart;
                 }
             }
         }
@@ -115,7 +115,7 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/add-to-cart/{id}", name="add-to-cart", methods={"GET"})
+     * @Route("/add-to-cart/{id}", name="add_to_cart", methods={"GET"})
      */
     public function addToCart(Product $product): Response
     {
@@ -141,13 +141,13 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/remove-from-cart/{id}", name="remove-from-cart", methods={"GET"})
+     * @Route("/remove-from-cart/{id}", name="remove_from_cart", methods={"GET"})
      */
     public function removeFromCart(Product $product): Response
     {
         $cart = $this->session->get('cart');
         if (empty($cart) || empty($cart[$product->getId()])) {
-            return $this->redirectToRoute('products');
+            return $this->redirectToRoute('cart');
         }
         $container = $cart[$product->getId()];
         if ($container instanceof ProductInCart) {
@@ -160,6 +160,6 @@ class IndexController extends AbstractController
         }
         $this->session->set('cart', $cart);
 
-        return $this->redirectToRoute('products');
+        return $this->redirectToRoute('cart');
     }
 }
