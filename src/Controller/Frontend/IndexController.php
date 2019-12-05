@@ -109,7 +109,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/cart", name="cart", methods={"GET","POST"})
      */
-    public function cart(Request $request): Response
+    public function cart(Request $request, \Swift_Mailer $mailer): Response
     {
         $model = new Order();
 
@@ -118,11 +118,24 @@ class IndexController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // store order
             $model->setCreatedAt(new \DateTime("now"));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($model);
             $entityManager->flush();
 
+            //send admin email
+            $body = "New Order! " . $_ENV['PROTOCOL'] . "://" . $_ENV['DOMAIN'] . "/backend/order/" . $model->getId();
+            $message = (new \Swift_Message('Order From ' . $_ENV['DOMAIN']))
+                ->setFrom($_ENV['EMAIL_FROM'])
+                ->setTo($_ENV['ADMIN_EMAIL'])
+                ->setBody($body);
+            $mailer->send($message);
+
+            // clear cart
+            $this->session->set('cart', null);
+
+            // redirect
             return $this->redirectToRoute('success_order_page');
         }
 
@@ -133,7 +146,7 @@ class IndexController extends AbstractController
             foreach ($cart as $productInCart) {
                 if ($productInCart instanceof ProductInCart) {
                     $product = $productRepository->findOneBy(['id' => $productInCart->getProduct()->getId()]);
-                    if ($product instanceof Product){
+                    if ($product instanceof Product) {
                         $productInCart->setProduct($product);
                         $products[] = $productInCart;
                     }
