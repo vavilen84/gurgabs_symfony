@@ -99,12 +99,18 @@ class IndexController extends AbstractController
      */
     public function cart(): Response
     {
+        $productRepository = $this->getDoctrine()->getRepository(Product::class);
+
         $cart = $this->session->get('cart');
         $products = [];
         if (!empty($cart)) {
             foreach ($cart as $productInCart) {
                 if ($productInCart instanceof ProductInCart) {
-                    $products[] = $productInCart;
+                    $product = $productRepository->findOneBy(['id' => $productInCart->getProduct()->getId()]);
+                    if ($product instanceof Product){
+                        $productInCart->setProduct($product);
+                        $products[] = $productInCart;
+                    }
                 }
             }
         }

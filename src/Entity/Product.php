@@ -92,6 +92,13 @@ class Product
         return $this->images;
     }
 
+    public function setImages(array $images): self
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
     public function addImage(File $image): self
     {
         if (!$this->images->contains($image)) {
