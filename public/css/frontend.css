@@ -38,6 +38,10 @@ hr {
     text-align: center;
 }
 
+#gallery-wrap {
+    display:none;
+}
+
 #gallery-wrap #left-wrap:hover,
 #gallery-wrap #right-wrap:hover,
 #gallery-wrap #close-wrap:hover {
@@ -108,4 +112,7 @@ img {
 
 .overflow-hidden {
     overflow: hidden;
+}
+#lightgallery a {
+    color:white;
 }

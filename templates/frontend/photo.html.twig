@@ -7,27 +7,10 @@
 {% endblock %}
 
 {% block body %}
-    {% include 'frontend/header_nav.html.twig' %}
-    <div id="gallery-wrap">
-        <div id="controls">
-            <div id="left-wrap">
-                <div id="left"></div>
-            </div>
-            <div id="right-wrap">
-                <div id="right"></div>
-            </div>
-            <div id="close-wrap">
-                <div id="close"></div>
-            </div>
-        </div>
-        <div id="content">
-            <div id="image"></div>
-            <div id="description"></div>
-        </div>
-    </div>
     <div id="lightgallery">
         {% for file in files %}
             <a class="gallery-image" href="#">
+                <span>{{ file.description }}</span>
                 <img src="/media/{{ file.file }}" alt="">
             </a>
         {% endfor %}
