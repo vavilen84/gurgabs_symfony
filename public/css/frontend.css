@@ -1,0 +1,21 @@
+body{
+    background: black;
+    color:white;
+}
+hr{
+    border: 1px solid white;
+}
+.logo{
+    width:100px;
+}
+.info .item{
+    padding: 5px;
+}
+.info {
+    margin: 70px 0 0 50px;
+}
+.info .item .title{
+    font-weight: bold;
+    width:140px;
+    display: inline-block;
+}

@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 /**
  * @Route("/backend/product")
@@ -18,8 +19,11 @@ class ProductController extends AbstractController
     /**
      * @Route("/", name="backend_product_index", methods={"GET"})
      */
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Products", $this->get("router")->generate("backend_product_index"));
+
         return $this->render('backend/product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
@@ -28,8 +32,11 @@ class ProductController extends AbstractController
     /**
      * @Route("/new", name="backend_product_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Products", $this->get("router")->generate("backend_product_index"));
+
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
@@ -51,8 +58,11 @@ class ProductController extends AbstractController
     /**
      * @Route("/{id}", name="backend_product_show", methods={"GET"})
      */
-    public function show(Product $product): Response
+    public function show(Product $product, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Products", $this->get("router")->generate("backend_product_index"));
+
         return $this->render('backend/product/show.html.twig', [
             'product' => $product,
         ]);
@@ -61,8 +71,11 @@ class ProductController extends AbstractController
     /**
      * @Route("/{id}/edit", name="backend_product_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Product $product): Response
+    public function edit(Request $request, Product $product, Breadcrumbs $breadcrumbs): Response
     {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Products", $this->get("router")->generate("backend_product_index"));
+
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 

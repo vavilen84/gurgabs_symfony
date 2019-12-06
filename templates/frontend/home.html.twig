@@ -1,0 +1,57 @@
+{% extends 'frontend.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="/css/shake.css">
+{% endblock %}
+
+{% block body %}
+    {% include 'frontend/header_nav.html.twig' %}
+    <div>
+        <div class="fl">
+            <img src="/images/band.jpg" alt="">
+        </div>
+        <div class="fl info">
+            <div class="item">
+                <span class="title">Country of origin:</span>
+                <span>Ukraine</span>
+            </div>
+            <div class="item">
+                <span class="title">Location:</span>
+                <span>Kharkiv</span>
+            </div>
+            <div class="item">
+                <span class="title">Status:</span>
+                <span>Active</span>
+            </div>
+            <div class="item">
+                <span class="title">Formed in:</span>
+                <span>1994</span>
+            </div>
+            <div class="item">
+                <span class="title">Genre</span>
+                <span>Death Metal</span>
+            </div>
+            <div class="item">
+                <span class="title">Death Metal:</span>
+                <span>Ukraine</span>
+            </div>
+            <div class="item">
+                <span class="title">Current label:</span>
+                <span>Independent</span>
+            </div>
+            <div class="item">
+                <span class="title">Years active:</span>
+                <span>1994 - {{ "now"|date("Y") }}</span>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <audio autoplay>
+        <source src="/music/gurgabs_stripped.mp3" type="audio/mpeg">
+        Audio is not supperted. <a href="/music/gurgabs_stripped.mp3" download>Download</a>.
+    </audio>
+{% endblock %}

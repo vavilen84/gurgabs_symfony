@@ -1,0 +1,15 @@
+{% extends 'frontend.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+    {% include 'frontend/header_nav.html.twig' %}
+    <h2>Events</h2>
+    {% for event in events %}
+        <hr>
+        <div>{{ event.eventDate }}</div>
+        <div>{{ event.title }}</div>
+        <div>{{ event.content }}</div>
+        <hr>
+    {% endfor %}
+{% endblock %}

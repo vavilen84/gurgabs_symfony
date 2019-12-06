@@ -1,14 +1,16 @@
 <div class="fl">
-    <a class="btn btn-primary" href="{{ path('home') }}">Home</a>
-    <a class="btn btn-primary" href="{{ path('video') }}">Video</a>
-    <a class="btn btn-primary" href="{{ path('audio') }}">Audio</a>
-    <a class="btn btn-primary" href="{{ path('photo') }}">Photo</a>
-    <a class="btn btn-primary" href="{{ path('products') }}">Merch</a>
+    <a href="/"><img class="logo shake-opacity" alt="" src="/images/gurgabs_logo.jpg"></a>
+    <a class="btn btn-dark ml50" href="{{ path('home') }}">Home</a>
+    <a class="btn btn-dark" href="{{ path('events') }}">Events</a>
+    <a class="btn btn-dark" href="{{ path('video') }}">Video</a>
+    <a class="btn btn-dark" href="{{ path('audio') }}">Audio</a>
+    <a class="btn btn-dark" href="{{ path('photo') }}">Photo</a>
+    <a class="btn btn-dark" href="{{ path('products') }}">Merch</a>
     {% if app.user %}
-        <a class="btn btn-primary" href="{{ path('backend_index') }}">Admin</a>
-        <a class="btn btn-primary" href="{{ path('app_logout') }}">Logout</a></span>
+        <a class="btn btn-dark" href="{{ path('backend_index') }}">Admin</a>
+        <a class="btn btn-dark" href="{{ path('app_logout') }}">Logout</a></span>
     {% else %}
-        <a class="btn btn-primary" href="{{ path('app_login') }}">Login</a></span>
+        <a class="btn btn-dark" href="{{ path('app_login') }}">Login</a></span>
     {% endif %}
 </div>
 <div class="fr">

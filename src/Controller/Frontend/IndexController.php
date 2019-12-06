@@ -36,12 +36,20 @@ class IndexController extends AbstractController
     /**
      * @Route("/", name="home", methods={"GET"})
      */
-    public function index(): Response
+    public function home(): Response
+    {
+        return $this->render('frontend/home.html.twig', []);
+    }
+
+    /**
+     * @Route("/events", name="events", methods={"GET"})
+     */
+    public function events(): Response
     {
         $eventRepository = $this->getDoctrine()->getRepository(Event::class);
         $events = $eventRepository->findBy([], ['id' => 'DESC'], 5);
 
-        return $this->render('frontend/index.html.twig', [
+        return $this->render('frontend/events.html.twig', [
             'events' => $events,
         ]);
     }
