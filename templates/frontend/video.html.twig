@@ -7,9 +7,17 @@
     <ul>
         {% for file in files %}
             <li>
-                <video width="320" height="240" controls>
-                    <source src="/media/{{ file.file }}" type="video/{{ file.ext }}">
-                </video>
+                <hr>
+                <div>
+                    {{ file.description }}
+                    <br>
+                </div>
+                <div>
+                    <video width="320" height="240" controls>
+                        <source src="/media/{{ file.file }}" type="video/{{ file.ext }}">
+                    </video>
+                </div>
+                <hr>
             </li>
         {% endfor %}
     </ul>

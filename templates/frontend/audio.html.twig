@@ -7,9 +7,18 @@
     <ul>
         {% for file in files %}
             <li>
-                <audio controls>
-                    <source src="/media/{{ file.file }}" type="audio/{{ file.ext }}">
-                </audio>
+                <hr>
+                <div>
+                    {{ file.description }}
+                    <br>
+                    <br>
+                </div>
+                <div>
+                    <audio controls>
+                        <source src="/media/{{ file.file }}" type="audio/{{ file.ext }}">
+                    </audio>
+                </div>
+                <hr>
             </li>
         {% endfor %}
     </ul>

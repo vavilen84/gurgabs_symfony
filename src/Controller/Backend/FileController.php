@@ -33,6 +33,45 @@ class FileController extends AbstractController
     }
 
     /**
+     * @Route("/audio", name="backend_audio_index", methods={"GET"})
+     */
+    public function audio(FileRepository $fileRepository, Breadcrumbs $breadcrumbs): Response
+    {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
+        return $this->render('backend/file/index.html.twig', [
+            'files' => $fileRepository->findBy(['type' => \App\Enum\File::MUSIC_TYPE]),
+        ]);
+    }
+
+    /**
+     * @Route("/video", name="backend_video_index", methods={"GET"})
+     */
+    public function video(FileRepository $fileRepository, Breadcrumbs $breadcrumbs): Response
+    {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
+        return $this->render('backend/file/index.html.twig', [
+            'files' => $fileRepository->findBy(['type' => \App\Enum\File::VIDEO_TYPE]),
+        ]);
+    }
+
+    /**
+     * @Route("/photo", name="backend_photo_index", methods={"GET"})
+     */
+    public function photo(FileRepository $fileRepository, Breadcrumbs $breadcrumbs): Response
+    {
+        $breadcrumbs->addItem("Backend", $this->get("router")->generate("backend_index"));
+        $breadcrumbs->addItem("Files", $this->get("router")->generate("backend_file_index"));
+
+        return $this->render('backend/file/index.html.twig', [
+            'files' => $fileRepository->findBy(['type' => \App\Enum\File::PHOTO_TYPE]),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="backend_file_new", methods={"GET","POST"})
      */
     public function new(Request $request, Breadcrumbs $breadcrumbs): Response
@@ -65,7 +104,7 @@ class FileController extends AbstractController
             $entityManager->persist($model);
             $entityManager->flush();
 
-            return $this->redirectToRoute('backend_file_index');
+            return $this->redirectToRoute('backend_index');
         }
 
         return $this->render('backend/file/new.html.twig', [
@@ -101,7 +140,7 @@ class FileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('backend_file_index');
+            return $this->redirectToRoute('backend_index');
         }
 
         return $this->render('backend/file/edit.html.twig', [
@@ -121,7 +160,7 @@ class FileController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('backend_file_index');
+        return $this->redirectToRoute('backend_index');
     }
 
 

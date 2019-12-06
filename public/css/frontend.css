@@ -1,21 +1,111 @@
-body{
+body {
     background: black;
-    color:white;
+    color: white;
 }
-hr{
+
+hr {
     border: 1px solid white;
 }
-.logo{
-    width:100px;
+
+.logo {
+    width: 100px;
 }
-.info .item{
+
+.info .item {
     padding: 5px;
 }
+
 .info {
     margin: 70px 0 0 50px;
 }
-.info .item .title{
+
+.info .item .title {
     font-weight: bold;
-    width:140px;
+    width: 140px;
     display: inline-block;
+}
+
+#lightgallery a img {
+    max-width: 100%;
+    max-height: 160px;
+}
+
+#lightgallery a {
+    max-width: 23%;
+    padding: 1%;
+    margin: 3px 0;
+    display: inline-block;
+    text-align: center;
+}
+
+#gallery-wrap #left-wrap:hover,
+#gallery-wrap #right-wrap:hover,
+#gallery-wrap #close-wrap:hover {
+    cursor: pointer;
+}
+
+#gallery-wrap #left-wrap,
+#gallery-wrap #right-wrap,
+#gallery-wrap #close-wrap {
+    position: absolute;
+    background: gray;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#gallery-wrap #left-wrap,
+#gallery-wrap #right-wrap {
+    top: 50%;
+    width: 41px;
+    height: 41px;
+}
+
+#gallery-wrap #close-wrap {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 41px;
+    height: 41px;
+}
+
+#gallery-wrap #left-wrap {
+    left: 10px;
+}
+
+#gallery-wrap #right-wrap {
+    right: 10px;
+}
+
+#gallery-wrap #left {
+    background: url("../images/controls.png") 7px -20px no-repeat;
+    width: 41px;
+    height: 41px;
+}
+
+#gallery-wrap #right {
+    background: url("../images/controls.png") 9px -58px no-repeat;
+    width: 41px;
+    height: 41px;
+
+}
+
+#gallery-wrap #close {
+    background: url("../images/controls.png") 0px 0px no-repeat;
+    width: 19px;
+    height: 19px;
+    position: relative;
+    top: 11px;
+    left: 9px;
+}
+
+#gallery-wrap #description > div {
+    color: white !important;
+}
+
+img {
+    max-width: 100%;
+}
+
+.overflow-hidden {
+    overflow: hidden;
 }
