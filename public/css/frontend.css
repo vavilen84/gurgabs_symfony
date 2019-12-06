@@ -24,15 +24,17 @@ hr {
     width: 140px;
     display: inline-block;
 }
+
 .products-list .info {
-    margin:0 0 20px 0;
-}
-.products-list .info .item .title{
-    width:100px;
+    margin: 0 0 20px 0;
 }
 
-.cart-wrap{
-    padding-left:10px;
+.products-list .info .item .title {
+    width: 100px;
+}
+
+.cart-wrap {
+    padding-left: 10px;
     background: white;
     border-radius: 5px;
 }
@@ -51,7 +53,7 @@ hr {
 }
 
 #gallery-wrap {
-    display:none;
+    display: none;
 }
 
 #gallery-wrap #left-wrap:hover,
@@ -125,6 +127,15 @@ img {
 .overflow-hidden {
     overflow: hidden;
 }
+
 #lightgallery a {
-    color:white;
+    color: white;
+}
+
+.order-success {
+    margin-top: 100px;
+}
+
+.order-success h1 {
+    text-align: center;
 }
