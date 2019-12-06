@@ -72,9 +72,10 @@ ul li {
     padding:0px 4px;
     min-width: 15px;
     display: inline-block;
+    height:19px;
 }
 .quantity{
-    top:-1px;
+    top:-3px;
     color:white;
     position: relative;
     font-size: 12px;

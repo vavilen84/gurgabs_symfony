@@ -24,6 +24,18 @@ hr {
     width: 140px;
     display: inline-block;
 }
+.products-list .info {
+    margin:0 0 20px 0;
+}
+.products-list .info .item .title{
+    width:100px;
+}
+
+.cart-wrap{
+    padding-left:10px;
+    background: white;
+    border-radius: 5px;
+}
 
 #lightgallery a img {
     max-width: 100%;

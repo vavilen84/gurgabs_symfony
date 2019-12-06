@@ -15,16 +15,21 @@
                         </a>
                     {% endfor %}
                 </div>
-                <div>
-                    {{ product.title }}
+                <div class="info">
+                    <div class="item">
+                        <span class="title">Title:</span>
+                        <span>{{ product.title }}</span>
+                    </div>
+                    <div class="item">
+                        <span class="title">Description:</span>
+                        <span>{{ product.description }}</span>
+                    </div>
+                    <div class="item">
+                        <span class="title">Price:</span>
+                        <span>{{ product.price }} (grn)</span>
+                    </div>
                 </div>
-                <div>
-                    {{ product.price }}
-                </div>
-                <div>
-                    {{ product.description }}
-                </div>
-                <a class="btn btn-primary add-to-cart-btn"
+                <a class="btn btn-light add-to-cart-btn"
                    href="{{ path('add_to_cart', {'id': product.id}) }}">Add to cart</a>
             </li>
             <hr>
