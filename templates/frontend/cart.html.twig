@@ -10,7 +10,7 @@
             <li>
                 {% for image in item.product.images %}
                     <a href="/media/{{ image.file }}" class="image-link">
-                        <img src="/media/{{ image.file }}" alt="">
+                        <img data-id="{{ image.id }}" src="/media/{{ image.file }}" alt="">
                     </a>
                 {% endfor %}
                 <div class="info">

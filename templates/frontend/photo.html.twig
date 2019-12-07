@@ -11,7 +11,7 @@
         {% for file in files %}
             <a class="gallery-image" href="#">
                 <span>{{ file.description }}</span>
-                <img src="/media/{{ file.file }}" alt="">
+                <img data-id="{{ file.id }}" src="/media/{{ file.file }}" alt="">
             </a>
         {% endfor %}
     </div>
